@@ -82,25 +82,30 @@ def employee_detail(request, pk):
 @api_view(['POST'])
 def execute_sql(request):
     """
-    Executes a raw SQL query provided in the request body and returns the result.
+    Executes one or more raw SQL queries provided in the request body and returns the result.
     """
-    # Get SQL query from request body
-    sql_query = request.data.get('query')
-    if not sql_query:
-        return Response({"error": "No SQL query provided."}, status=status.HTTP_400_BAD_REQUEST)
+    # Get SQL queries from request body
+    sql_queries = request.data.get('queries')
+    if not sql_queries or not isinstance(sql_queries, list):
+        return Response({"error": "Please provide a list of SQL queries."}, status=status.HTTP_400_BAD_REQUEST)
 
+    results = []
     try:
-        # Execute the SQL query
+        # Execute each SQL query
         with connection.cursor() as cursor:
-            cursor.execute(sql_query)
-            # If the query has results, fetch them
-            if cursor.description:
-                columns = [col[0] for col in cursor.description]
-                rows = cursor.fetchall()
-                results = [dict(zip(columns, row)) for row in rows]
-                return Response(results, status=status.HTTP_200_OK)
-            else:
-                return Response({"message": "Query executed successfully. No data returned."}, status=status.HTTP_200_OK)
+            for sql_query in sql_queries:
+                cursor.execute(sql_query)
+                # If the query has results, fetch them
+                if cursor.description:
+                    columns = [col[0] for col in cursor.description]
+                    rows = cursor.fetchall()
+                    query_result = [dict(zip(columns, row)) for row in rows]
+                    results.append({"query": sql_query, "result": query_result})
+                else:
+                    results.append({"query": sql_query, "message": "Query executed successfully. No data returned."})
+
+        return Response(results, status=status.HTTP_200_OK)
+
     except Exception as e:
         # Handle SQL errors
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
