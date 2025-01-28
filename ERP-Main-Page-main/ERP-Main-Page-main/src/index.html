@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Module</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar Section -->
+<header>
+    <nav>
+        <div class="navbar">
+            <div class="logo">
+                <h1>HR Module</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Apps</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Sidebar Section -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-buttons">
+            <button class="sidebar-btn" onclick="loadSection('manage-employee')">Manage Employee</button>
+            <button class="sidebar-btn" onclick="loadSection('time-sheet')">Time Sheet</button>
+            <button class="sidebar-btn" onclick="loadSection('employee-tasks')">Employee Tasks</button>
+            <button class="sidebar-btn" onclick="loadSection('manage-payroll')">Manage Payroll</button>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="content" id="content">
+        <section class="body-section">
+            <div id="dynamic-content">
+                <div class="employee_tasks d-none" id="employee_tasks">
+                    <h2>Manage Payroll</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Total Hours</th>
+                            <th>Base Salary</th>
+                            <th>Bonus</th>
+                            <th>Deduction</th>
+                            <th>Total Salary</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>John Doe</td>
+                            <td>160</td>
+                            <td>$2000</td>
+                            <td id="bonus-101">$0</td>
+                            <td id="deduction-101">$0</td>
+                            <td id="total-101">$2000</td>
+                            <td>
+                                <button onclick="addBonus('101')">Add Bonus</button>
+                                <button onclick="makeDeduction('101')">Make Deduction</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-none sheet" id="sheet">
+                    <h2>Time Sheet</h2>
+            <div class="time-sheet-container">
+                <input type="text" id="task-name" placeholder="What are you working on?" />
+                <select id="project-dropdown">
+                    <option>Select Project</option>
+                    <option>Project A</option>
+                    <option>Project B</option>
+                </select>
+                <span id="timer">00:00:00</span>
+                <button id="start-btn">Start</button>
+                <button id="end-btn" disabled>End</button>
+            </div>
+            <h3>Recorded Tasks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Project</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody id="recorded-tasks">
+                    <!-- Task records will be added here -->
+                </tbody>
+            </table>
+                </div>
+                <div class="d-none manage-employee" id="manage-employee">
+                    <h2>Manage Employee</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Assigned Task</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>John Doe</td>
+                        <td>
+                            <select>
+                                <option>Task 1</option>
+                                <option>Task 2</option>
+                                <option>Task 3</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="edit-employee" data-id="101">Edit</button>
+                            <button class="delete-employee" data-id="101">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+                </div>
+                <div class="d-none manage-payroll" id="manage-payroll">
+                    <h2>Manage Payroll</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Total Hours</th>
+                            <th>Base Salary</th>
+                            <th>Bonus</th>
+                            <th>Deduction</th>
+                            <th>Total Salary</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamic payroll rows would be loaded here -->
+                    </tbody>
+                </table>
+
+                </div>
+            </div>
+            
+        </section>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

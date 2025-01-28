@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #222 !important;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #fff;
+  position: fixed; /* Make the navbar fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Make navbar stretch across the screen */
+  z-index: 1000; /* Ensure the navbar is above the sidebar */
+}
+
+.navbar .logo h1 {
+  margin: 0;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar .nav-links li {
+  display: inline;
+}
+
+.navbar .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 999; /* Ensure the sidebar is below the navbar */
+}
+
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 60px; /* Adjust spacing to avoid overlapping the navbar */
+}
+
+.sidebar-btn {
+  background-color: #444;
+  color: #fff;
+  border: 2px solid transparent;
+  text-align: center;
+  height: 50px; /* Ensure a consistent button height */
+  padding: 0; /* Remove any additional padding */
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex; /* Flexbox for centering */
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  font-size: 16px; /* Adjust the font size for better visibility */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.sidebar-btn:hover {
+  background-color: #555;
+  border-color: #fff;
+}
+
+.sidebar-btn:focus {
+  outline: none;
+}
+
+/* Content Styles */
+.content {
+  margin-left: 200px; /* Ensure the content starts after the sidebar */
+  padding: 20px;
+  margin-top: 60px; /* Account for the fixed navbar */
+  background-color: #333; /* Match the sidebar's background color */
+  color: #fff; /* Make the text visible against the dark background */
+  min-height: calc(100vh - 60px); /* Ensure the content area covers the viewport height */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  color: #fff; /* Ensure table text is visible against the dark background */
+}
+
+table th {
+  background-color: #444;
+}
+
+/* Timer Styles */
+.time-sheet-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#timer {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Section Visibility */
+.d-none {
+  display: none;
+}
+
+/*# sourceMappingURL=main.css.map */
