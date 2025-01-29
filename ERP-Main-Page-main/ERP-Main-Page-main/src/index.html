@@ -41,6 +41,80 @@
         <section class="body-section">
             <div id="dynamic-content">
                 <div class="employee_tasks d-none" id="employee_tasks">
+                    <h2>Employee Tasks</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Assigned Tasks</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Task 1, Task 2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-none sheet" id="sheet">
+                    <h2>Time Sheet</h2>
+                    <div class="time-sheet-container">
+                        <input type="text" id="task-name" placeholder="What are you working on?" />
+                        <select id="project-dropdown">
+                            <option>Select Project</option>
+                            <option>Project A</option>
+                            <option>Project B</option>
+                        </select>
+                        <span id="timer">00:00:00</span>
+                        <button id="start-btn">Start</button>
+                        <button id="end-btn" disabled>End</button>
+                    </div>
+                    <h3>Recorded Tasks</h3>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Project</th>
+                            <th>Duration</th>
+                        </tr>
+                        </thead>
+                        <tbody id="recorded-tasks">
+                        <!-- Task records will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-none manage-employee" id="manage-employee">
+                    <h2>Manage Employee</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Assigned Task</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>John Doe</td>
+                            <td>
+                                <select>
+                                    <option>Task 1</option>
+                                    <option>Task 2</option>
+                                    <option>Task 3</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="edit-employee" data-id="101">Edit</button>
+                                <button class="delete-employee" data-id="101">Delete</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-none manage-payroll" id="manage-payroll">
                     <h2>Manage Payroll</h2>
                     <table>
                         <thead>
@@ -71,87 +145,10 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="d-none sheet" id="sheet">
-                    <h2>Time Sheet</h2>
-            <div class="time-sheet-container">
-                <input type="text" id="task-name" placeholder="What are you working on?" />
-                <select id="project-dropdown">
-                    <option>Select Project</option>
-                    <option>Project A</option>
-                    <option>Project B</option>
-                </select>
-                <span id="timer">00:00:00</span>
-                <button id="start-btn">Start</button>
-                <button id="end-btn" disabled>End</button>
-            </div>
-            <h3>Recorded Tasks</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Task</th>
-                        <th>Project</th>
-                        <th>Duration</th>
-                    </tr>
-                </thead>
-                <tbody id="recorded-tasks">
-                    <!-- Task records will be added here -->
-                </tbody>
-            </table>
-                </div>
-                <div class="d-none manage-employee" id="manage-employee">
-                    <h2>Manage Employee</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Assigned Task</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>John Doe</td>
-                        <td>
-                            <select>
-                                <option>Task 1</option>
-                                <option>Task 2</option>
-                                <option>Task 3</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="edit-employee" data-id="101">Edit</button>
-                            <button class="delete-employee" data-id="101">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-                </div>
-                <div class="d-none manage-payroll" id="manage-payroll">
-                    <h2>Manage Payroll</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Employee ID</th>
-                            <th>Name</th>
-                            <th>Total Hours</th>
-                            <th>Base Salary</th>
-                            <th>Bonus</th>
-                            <th>Deduction</th>
-                            <th>Total Salary</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dynamic payroll rows would be loaded here -->
-                    </tbody>
-                </table>
 
                 </div>
             </div>
-            
+
         </section>
     </div>
 </div>
