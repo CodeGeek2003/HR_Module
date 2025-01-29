@@ -52,57 +52,7 @@ function deleteEmployee(employeeId) {
 
 // Timer functions for the time sheet
 let timerInterval;
-function startTimer() {
-    const startBtn = document.getElementById('start-btn');
-    const endBtn = document.getElementById('end-btn');
-    const timer = document.getElementById('timer');
 
-    if (!timer || !startBtn || !endBtn) {
-        console.error('Timer or buttons not found.');
-        return;
-    }
-
-    const startTime = new Date();
-    timerInterval = setInterval(() => {
-        const elapsed = new Date() - startTime;
-        const hours = String(Math.floor(elapsed / 3600000)).padStart(2, '0');
-        const minutes = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, '0');
-        const seconds = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
-        timer.textContent = `${hours}:${minutes}:${seconds}`;
-    }, 1000);
-
-    startBtn.disabled = true;
-    endBtn.disabled = false;
-}
-
-function endTimer() {
-    clearInterval(timerInterval);
-
-    const timer = document.getElementById('timer');
-    const taskName = document.getElementById('task-name').value || 'N/A';
-    const projectName = document.getElementById('project-dropdown').value || 'N/A';
-    const recordedTasks = document.getElementById('recorded-tasks');
-
-    if (!timer || !recordedTasks) {
-        console.error('Timer or recorded tasks not found.');
-        return;
-    }
-
-    const duration = timer.textContent;
-    const taskRecord = `
-        <tr>
-            <td>${taskName}</td>
-            <td>${projectName}</td>
-            <td>${duration}</td>
-        </tr>
-    `;
-    recordedTasks.innerHTML += taskRecord;
-
-    // Reset the timer
-    timer.textContent = '00:00:00';
-    document.getElementById('start-btn').disabled = false;
-    document.getElementById('end-btn').disabled = true;
-}
 
 // Bonus and deduction management for payroll
 function addBonus(employeeId) {
