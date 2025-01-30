@@ -38,7 +38,7 @@ function employees_data() {
     let sqlQuery = [`SELECT e.EmployeeKey, e.FullName, f.BaseSalary, f.TotalDeductions, f.TotalBonuses
                      FROM DimEmployees e
                               JOIN FactPayroll f ON e.EmployeeKey = f.EmployeeKey
-                     ORDER BY f.BaseSalary DESC`];
+                     ORDER BY f.EmployeeKey`];
 
     axios.post('http://127.0.0.1:8000/api/execute_sql/', {
         queries: sqlQuery
@@ -175,6 +175,7 @@ function saveEmployeeChanges(id) {
 
             // Mark the row as no longer being edited
             tableRow.setAttribute("data-editing", "false");
+            employees_data();
         })
         .catch(error => {
             console.error("Error updating employee:", error.response ? error.response.data : error);
@@ -290,7 +291,7 @@ function tasks_data(){
     let sqlQuery = [`SELECT
                          e.FullName,
                          GROUP_CONCAT(t.EntryName SEPARATOR ', ') AS AssignedTasks
-                            FROM DimEmployees e
+                     FROM DimEmployees e
                               JOIN TimeSheet t ON e.EmployeeKey = t.EmployeeKey
                      GROUP BY e.FullName;`];
 
