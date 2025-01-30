@@ -1,0 +1,38 @@
+/* Navbar Styles */
+.navbar {
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #fff;
+  position: fixed !important; /* Ensure the navbar is fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Make navbar stretch across the screen */
+  z-index: 1000; /* Ensure the navbar is above the sidebar */
+}
+
+.navbar .logo h1 {
+  margin: 0;
+}
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+}
+.navbar .nav-links li {
+  display: inline;
+}
+.navbar .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+.navbar .nav-links a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}

@@ -1,0 +1,10 @@
+/* Content Styles */
+.content {
+  margin-left: 200px; /* Ensure the content starts after the sidebar */
+  padding: 20px;
+  margin-top: 147px; /* Adjust this value to match the navbar's height */
+  background-color: #333; /* Match the sidebar's background color */
+  color: #fff; /* Make the text visible against the dark background */
+  min-height: calc(100vh - 80px); /* Adjust this value to consider navbar height */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
+}

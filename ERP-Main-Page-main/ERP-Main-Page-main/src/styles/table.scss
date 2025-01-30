@@ -1,0 +1,15 @@
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  color: #fff; /* Ensure table text is visible against the dark background */
+}
+table th {
+  background-color: #444;
+}

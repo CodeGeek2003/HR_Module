@@ -6,6 +6,11 @@ body {
   background-color: #222 !important;
 }
 
+/* Section Visibility */
+.d-none {
+  display: none;
+}
+
 /* Navbar Styles */
 .navbar {
   background-color: #333;
@@ -14,7 +19,7 @@ body {
   align-items: center;
   padding: 10px 20px;
   color: #fff;
-  position: fixed; /* Make the navbar fixed at the top */
+  position: fixed !important; /* Ensure the navbar is fixed at the top */
   top: 0;
   left: 0;
   width: 100%; /* Make navbar stretch across the screen */
@@ -97,17 +102,6 @@ body {
   outline: none;
 }
 
-/* Content Styles */
-.content {
-  margin-left: 200px; /* Ensure the content starts after the sidebar */
-  padding: 20px;
-  margin-top: 60px; /* Account for the fixed navbar */
-  background-color: #333; /* Match the sidebar's background color */
-  color: #fff; /* Make the text visible against the dark background */
-  min-height: calc(100vh - 60px); /* Ensure the content area covers the viewport height */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
-}
-
 /* Table Styles */
 table {
   width: 100%;
@@ -126,6 +120,17 @@ table th {
   background-color: #444;
 }
 
+/* Content Styles */
+.content {
+  margin-left: 200px; /* Ensure the content starts after the sidebar */
+  padding: 20px;
+  margin-top: 147px; /* Adjust this value to match the navbar's height */
+  background-color: #333; /* Match the sidebar's background color */
+  color: #fff; /* Make the text visible against the dark background */
+  min-height: calc(100vh - 80px); /* Adjust this value to consider navbar height */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
+}
+
 /* Timer Styles */
 .time-sheet-container {
   display: flex;
@@ -136,11 +141,6 @@ table th {
 #timer {
   font-size: 1.2em;
   font-weight: bold;
-}
-
-/* Section Visibility */
-.d-none {
-  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */
