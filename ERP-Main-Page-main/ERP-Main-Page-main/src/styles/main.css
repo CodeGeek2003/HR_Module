@@ -129,6 +129,71 @@ table th {
   color: #fff; /* Make the text visible against the dark background */
   min-height: calc(100vh - 80px); /* Adjust this value to consider navbar height */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
+  overflow-x: auto; /* Prevent content overflow */
+  /* Table styling */
+  /* Buttons (Save & Cancel) */
+  /* Action Cell: Center Buttons */
+}
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Table Header */
+  /* Alternate Row Shading */
+}
+.content table th, .content table td {
+  border: 1px solid #555; /* Subtle border for visibility */
+  padding: 10px; /* Ensure sufficient spacing */
+  text-align: left;
+  color: #fff;
+  vertical-align: middle; /* Aligns cell content in the center */
+  /* Editable Input Fields */
+}
+.content table th input, .content table td input {
+  width: 100%; /* Ensures input fields take full cell width */
+  box-sizing: border-box; /* Includes padding/borders in width calculation */
+  padding: 5px;
+  background-color: #444; /* Match the table background */
+  color: #fff; /* White text for dark background */
+  border: 1px solid #666;
+  border-radius: 5px;
+  outline: none;
+}
+.content table th input:focus, .content table td input:focus {
+  border-color: #888; /* Highlight border when focused */
+  background-color: #555; /* Slightly brighter background */
+}
+.content table th {
+  background-color: #444; /* Darker header background */
+  font-weight: bold;
+}
+.content table tr:nth-child(even) {
+  background-color: #3a3a3a;
+}
+.content .save-employee, .content .cancel-employee {
+  padding: 5px 10px;
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.content .save-employee:hover, .content .cancel-employee:hover {
+  background-color: #555;
+  border-color: #888;
+}
+.content .save-employee:focus, .content .cancel-employee:focus {
+  outline: none;
+}
+.content td:last-child {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  justify-content: center;
+}
+
+/* Sidebar Offset */
+.sidebar + .content {
+  margin-left: 200px;
 }
 
 /* Timer Styles */
@@ -141,6 +206,45 @@ table th {
 #timer {
   font-size: 1.2em;
   font-weight: bold;
+}
+
+/* Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 9999;
+  display: none; /* Initially hidden */
+}
+
+/* Loader Animation */
+.loader {
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

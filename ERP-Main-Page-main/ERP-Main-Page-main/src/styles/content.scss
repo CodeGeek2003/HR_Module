@@ -7,4 +7,79 @@
   color: #fff; /* Make the text visible against the dark background */
   min-height: calc(100vh - 80px); /* Adjust this value to consider navbar height */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to make content stand out */
+  overflow-x: auto; /* Prevent content overflow */
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid #555; /* Subtle border for visibility */
+      padding: 10px; /* Ensure sufficient spacing */
+      text-align: left;
+      color: #fff;
+      vertical-align: middle; /* Aligns cell content in the center */
+
+      /* Editable Input Fields */
+      input {
+        width: 100%; /* Ensures input fields take full cell width */
+        box-sizing: border-box; /* Includes padding/borders in width calculation */
+        padding: 5px;
+        background-color: #444; /* Match the table background */
+        color: #fff; /* White text for dark background */
+        border: 1px solid #666;
+        border-radius: 5px;
+        outline: none;
+
+        &:focus {
+          border-color: #888; /* Highlight border when focused */
+          background-color: #555; /* Slightly brighter background */
+        }
+      }
+    }
+
+    /* Table Header */
+    th {
+      background-color: #444; /* Darker header background */
+      font-weight: bold;
+    }
+
+    /* Alternate Row Shading */
+    tr:nth-child(even) {
+      background-color: #3a3a3a;
+    }
+  }
+
+  /* Buttons (Save & Cancel) */
+  .save-employee, .cancel-employee {
+    padding: 5px 10px;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+
+    &:hover {
+      background-color: #555;
+      border-color: #888;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  /* Action Cell: Center Buttons */
+  td:last-child {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    justify-content: center;
+  }
+}
+
+/* Sidebar Offset */
+.sidebar + .content {
+  margin-left: 200px;
 }

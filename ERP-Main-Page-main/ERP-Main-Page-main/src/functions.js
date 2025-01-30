@@ -35,9 +35,9 @@ function loadSection(section) {
 
 // ✅ Function to fetch employee salary data from API
 function employees_data() {
-    let sqlQuery = [`SELECT e.EmployeeKey, e.FullName, f.BaseSalary, f.TotalDeductions, f.TotalBonuses 
-                     FROM DimEmployees e 
-                     JOIN FactPayroll f ON e.EmployeeKey = f.EmployeeKey 
+    let sqlQuery = [`SELECT e.EmployeeKey, e.FullName, f.BaseSalary, f.TotalDeductions, f.TotalBonuses
+                     FROM DimEmployees e
+                              JOIN FactPayroll f ON e.EmployeeKey = f.EmployeeKey
                      ORDER BY f.BaseSalary DESC`];
 
     axios.post('http://127.0.0.1:8000/api/execute_sql/', {
@@ -62,7 +62,7 @@ function populateManageEmployeesTable(employees) {
     console.log(employees);
     employees.forEach(employee => {
         const row = document.createElement("tr");
-
+        row.setAttribute("data-id", employee.EmployeeKey);
         row.innerHTML = `
             <td>${employee.EmployeeKey}</td>
             <td>${employee.FullName}</td>
@@ -100,8 +100,117 @@ function attachEventListenersManageEmployees() {
 
 // ✅ Edit Employee function
 function editEmployeeManageEmployees(id) {
-    alert(`Edit Employee ID: ${id}`);
-    // Here, you can implement modal pop-ups or other UI to edit employee details
+    const tableRow = document.querySelector(`tr[data-id="${id}"]`);
+    const cells = tableRow.querySelectorAll("#employees-data td");
+
+    // Check if the row is already in edit mode
+    if (tableRow.getAttribute("data-editing") === "true") return;
+
+    // Mark the row as being edited
+    tableRow.setAttribute("data-editing", "true");
+
+    // Replace cell content with editable input fields for editable columns
+    for (let i = 1; i <= 4; i++) { // Skip Employee ID (index 0)
+        const currentValue = cells[i].textContent.trim();
+        cells[i].innerHTML = `<input type="text" value="${currentValue}" class="editable-cell" />`;
+    }
+
+    // Change "Edit" button to "Save" and add a "Cancel" button
+    const actionCell = cells[5];
+    actionCell.innerHTML = `
+        <button class="save-employee" data-id="${id}">Save</button>
+        <button class="cancel-employee" data-id="${id}">Cancel</button>
+    `;
+
+    // Attach event listeners to Save and Cancel buttons
+    actionCell.querySelector(".save-employee").addEventListener("click", () => saveEmployeeChanges(id));
+    actionCell.querySelector(".cancel-employee").addEventListener("click", () => cancelEmployeeEdit(id));
+}
+
+// ✅ Save Employee Changes Function
+function saveEmployeeChanges(id) {
+    const tableRow = document.querySelector(`tr[data-id="${id}"]`);
+    const cells = tableRow.querySelectorAll("td");
+
+    const updatedEmployee = {
+        EmployeeKey: parseInt(id), // Ensure it's an integer
+        FullName: cells[1].querySelector("input").value.trim(),
+        BaseSalary: parseFloat(cells[2].querySelector("input").value.trim().replace(/,/g, "")),
+        TotalBonuses: parseFloat(cells[3].querySelector("input").value.trim().replace(/,/g, "")),
+        TotalDeductions: parseFloat(cells[4].querySelector("input").value.trim().replace(/,/g, ""))
+    };
+
+    // Construct SQL UPDATE statement
+    const sqlQuery = `
+        UPDATE DimEmployees e
+            JOIN FactPayroll f ON e.EmployeeKey = f.EmployeeKey
+            SET
+                e.FullName = '${updatedEmployee.FullName}',
+                f.BaseSalary = ${updatedEmployee.BaseSalary},
+                f.TotalBonuses = ${updatedEmployee.TotalBonuses},
+                f.TotalDeductions = ${updatedEmployee.TotalDeductions}
+        WHERE e.EmployeeKey = ${updatedEmployee.EmployeeKey};
+    `;
+
+    console.log("Executing SQL:", sqlQuery); // Debugging log
+
+    axios.post("http://127.0.0.1:8000/api/execute_sql/", { queries: [sqlQuery] })
+        .then(response => {
+            console.log("Update Response:", response.data);
+
+            // Update table display with new values
+            cells[1].textContent = updatedEmployee.FullName;
+            cells[2].textContent = updatedEmployee.BaseSalary.toLocaleString();
+            cells[3].textContent = updatedEmployee.TotalBonuses.toLocaleString();
+            cells[4].textContent = updatedEmployee.TotalDeductions.toLocaleString();
+
+            // Reset buttons
+            cells[5].innerHTML = `
+                <button class="edit-employee">Edit</button>
+                <button class="delete-employee">Delete</button>
+            `;
+
+            // Reattach event listeners
+            attachEventListenersManageEmployees();
+
+            // Mark the row as no longer being edited
+            tableRow.setAttribute("data-editing", "false");
+        })
+        .catch(error => {
+            console.error("Error updating employee:", error.response ? error.response.data : error);
+            alert("Failed to save changes. Please check the console.");
+        });
+}
+// ✅ Cancel Employee Edit Function
+function cancelEmployeeEdit(id) {
+    const tableRow = document.querySelector(`tr[data-id="${id}"]`);
+    const cells = tableRow.querySelectorAll("td");
+
+    // Restore the original values from the row
+    const originalValues = {
+        FullName: cells[1].querySelector("input").value,
+        BaseSalary: cells[2].querySelector("input").value,
+        TotalBonuses: cells[3].querySelector("input").value,
+        TotalDeductions: cells[4].querySelector("input").value
+    };
+
+    // Reset the cell contents to their original values
+    cells[1].textContent = originalValues.FullName;
+    cells[2].textContent = parseFloat(originalValues.BaseSalary).toLocaleString();
+    cells[3].textContent = parseFloat(originalValues.TotalBonuses).toLocaleString();
+    cells[4].textContent = parseFloat(originalValues.TotalDeductions).toLocaleString();
+
+    // Reset the action buttons
+    cells[5].innerHTML = `
+        <button class="edit-employee" data-id="${id}">Edit</button>
+        <button class="delete-employee" data-id="${id}">Delete</button>
+    `;
+
+    // Reattach event listeners to the action buttons
+    attachEventListenersManageEmployees();
+
+    // Mark the row as no longer being edited
+    tableRow.setAttribute("data-editing", "false");
 }
 
 // ✅ Delete Employee function
@@ -114,7 +223,7 @@ function deleteEmployeeManageEmployees(id) {
 
 // ✅ Function to attach general event listeners for different sections
 function attachEventListeners(section) {
-     if (section === 'time-sheet') {
+    if (section === 'time-sheet') {
         const startBtn = document.getElementById('start-btn');
         const endBtn = document.getElementById('end-btn');
 
